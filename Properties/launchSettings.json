@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "cradl_to_atlas": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7040",
+      "launchBrowser": false
+    }
+  }
+}
