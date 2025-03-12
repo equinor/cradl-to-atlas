@@ -36,7 +36,12 @@ namespace cradl_to_atlas
 
             // Generate a unique filename with timestamp
             string fileName = $"data-{DateTime.UtcNow:yyyyMMddHHmmss}.json";
-            string storageAccountUrl = "https://<your-storage-account>.blob.core.windows.net";
+            string storageAccountUrl = Environment.GetEnvironmentVariable("STORAGE_ACCOUNT_URL");
+            if (string.IsNullOrEmpty(storageAccountUrl))
+            {
+                _logger.LogError("Storage account URL is not configured.");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
             string containerName = "cradlai-json"; // Change this to your blob container name
 
             // Authenticate using Managed Identity (MSAL)
